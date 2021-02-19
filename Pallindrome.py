@@ -1,5 +1,12 @@
+# import libraries
 import numpy as np
 import re
+
+"""
+Author : Rahul Pandey
+- This program takes a string and output if it is pallindrome or not
+- The program is made case insensitive
+"""
 
 
 def is_this_pallindrome(sentence, space):
@@ -7,13 +14,14 @@ def is_this_pallindrome(sentence, space):
     This takes sentence as an input
     it takes two arguments
     sentence and space
+    space can be 'Yes' or 'No'
 
-    ex: is_this_pallindrome('ABCBA, 'YES')"""
-    input_sentence = str.upper(sentence)
+    ex: is_this_pallindrome('ABCBA, 'N')"""
+    input_sentence = str.upper(sentence) # upper case 
     char_list = []
     result = ""
     # checks if we have any spaces
-    if str.upper(space) == "YES":
+    if str.upper(space) == "Y":
         char_list = list(re.sub(r"\s+", "", input_sentence))
     else:
         char_list = list(input_sentence)
@@ -46,6 +54,26 @@ def is_this_pallindrome(sentence, space):
 
 
 if __name__ == "__main__":
-    text = input("Enter text : ")
+    space = "y"
+    text = ""
+    while True:
+        try:
+            # Checking required field
+            if not text:
+                text = input("Enter text : ")
+            if " " in text:
+                space = input(
+                    "Text contains spaces. Do you want to remove it? Please enter : Y/N"
+                )
+        except ValueError:
+            print("Sorry, I didn't understand that.")
+            # better try again... Return to the start of the loop
+            continue
+        else:
+            if text and (space.upper() == "N" or space.upper() == "Y"):
+                # we're ready to exit the loop.
+                break
+            else:
+                continue
     print("chacking if {} is pallindrome".format(text))
-    print(is_this_pallindrome(text, "no"))
+    print(is_this_pallindrome(text, space.upper()))
